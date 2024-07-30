@@ -1,22 +1,35 @@
 package com.app.springJwt.controller;
 
+import com.app.springJwt.Repository.UserRepository;
+import com.app.springJwt.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin("*")
 public class DemoController {
 
-    @GetMapping("/user")
-    public ResponseEntity<String> hello()
+    @Autowired
+    private UserRepository userRepository;
+
+    @GetMapping("/user/{userName}")
+    public ResponseEntity<User> getUser(@PathVariable String userName)
     {
-        return ResponseEntity.ok("hey I am controller");
+        User user = userRepository.findByUserName(userName).orElseThrow();
+    
+        return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/admin")
-    public ResponseEntity<String> hiadmin()
+    @GetMapping("/admin/{userName}")
+    public ResponseEntity<User> getadmin(@PathVariable String userName)
     {
-        return ResponseEntity.ok("hey I am admin");
+       User user= userRepository.findByUserName(userName).orElseThrow();
+
+       return  ResponseEntity.ok(user);
     }
 
 }
