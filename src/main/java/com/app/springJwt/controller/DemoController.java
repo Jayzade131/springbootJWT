@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoController {
 
-    @GetMapping("/hello")
+    @GetMapping("/user")
     public ResponseEntity<String> hello()
     {
         return ResponseEntity.ok("hey I am controller");
     }
 
-    @GetMapping("/hiadmin")
+    @GetMapping("/admin")
     public ResponseEntity<String> hiadmin()
     {
         return ResponseEntity.ok("hey I am admin");
